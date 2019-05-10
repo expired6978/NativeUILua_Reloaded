@@ -1580,7 +1580,15 @@ function UIMenu:UpdateScaleform()
             if #self.InstructionalButtons[i] == 2 then
                 PushScaleformMovieFunction(self.InstructionalScaleform, "SET_DATA_SLOT")
                 PushScaleformMovieFunctionParameterInt(count)
-                PushScaleformMovieMethodParameterButtonName(self.InstructionalButtons[i][1])
+                
+                if type(self.InstructionalButtons[i][1] == 'table') then
+                    for j=1, #self.InstructionalButtons[i][1], 1 do
+                        PushScaleformMovieMethodParameterButtonName(self.InstructionalButtons[i][1][j])
+                    end
+                else
+                    PushScaleformMovieMethodParameterButtonName(self.InstructionalButtons[i][1])
+                end
+
                 PushScaleformMovieFunctionParameterString(self.InstructionalButtons[i][2])
                 PopScaleformMovieFunction()
                 count = count + 1
