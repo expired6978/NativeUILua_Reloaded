@@ -715,24 +715,25 @@ function UIMenu:ProcessControl()
     end
     if not self.LeftPressed then
         if self.Controls.Left.Enabled and (IsDisabledControlPressed(0, 174) or IsDisabledControlPressed(1, 174) or IsDisabledControlPressed(2, 174)) then
-            local type, subtype = self.Items[self:CurrentSelection()]()
+            local Item = self.Items[self:CurrentSelection()]
+            local type, subtype = Item()
             Citizen.CreateThread(function()
                 if (subtype == "UIMenuSliderHeritageItem") then
                     self.LeftPressed = true
                     self:GoLeft()
-                    Citizen.Wait(40)
+                    Citizen.Wait(Item.InputDelay and Item.InputDelay.Start or 40)
                     while self.Controls.Left.Enabled and (IsDisabledControlPressed(0, 174) or IsDisabledControlPressed(1, 174) or IsDisabledControlPressed(2, 174)) do
                         self:GoLeft()
-                        Citizen.Wait(20)
+                        Citizen.Wait(Item.InputDelay and Item.InputDelay.Hold or 20)
                     end
                     self.LeftPressed = false
                 else
                     self.LeftPressed = true
                     self:GoLeft()
-                    Citizen.Wait(175)
+                    Citizen.Wait(Item.InputDelay and Item.InputDelay.Start or 175)
                     while self.Controls.Left.Enabled and (IsDisabledControlPressed(0, 174) or IsDisabledControlPressed(1, 174) or IsDisabledControlPressed(2, 174)) do
                         self:GoLeft()
-                        Citizen.Wait(125)
+                        Citizen.Wait(Item.InputDelay and Item.InputDelay.Hold or 125)
                     end
                     self.LeftPressed = false
                 end
@@ -741,24 +742,25 @@ function UIMenu:ProcessControl()
     end
     if not self.RightPressed then
         if self.Controls.Right.Enabled and (IsDisabledControlPressed(0, 175) or IsDisabledControlPressed(1, 175) or IsDisabledControlPressed(2, 175)) then
+            local Item = self.Items[self:CurrentSelection()]
+            local type, subtype = Item()
             Citizen.CreateThread(function()
-                local type, subtype = self.Items[self:CurrentSelection()]()
                 if (subtype == "UIMenuSliderHeritageItem") then
                     self.RightPressed = true
                     self:GoRight()
-                    Citizen.Wait(40)
+                    Citizen.Wait(Item.InputDelay and Item.InputDelay.Start or 40)
                     while self.Controls.Right.Enabled and (IsDisabledControlPressed(0, 175) or IsDisabledControlPressed(1, 175) or IsDisabledControlPressed(2, 175)) do
                         self:GoRight()
-                        Citizen.Wait(20)
+                        Citizen.Wait(Item.InputDelay and Item.InputDelay.Hold or 20)
                     end
                     self.RightPressed = false
                 else
                     self.RightPressed = true
                     self:GoRight()
-                    Citizen.Wait(175)
+                    Citizen.Wait(Item.InputDelay and Item.InputDelay.Start or 175)
                     while self.Controls.Right.Enabled and (IsDisabledControlPressed(0, 175) or IsDisabledControlPressed(1, 175) or IsDisabledControlPressed(2, 175)) do
                         self:GoRight()
-                        Citizen.Wait(125)
+                        Citizen.Wait(Item.InputDelay and Item.InputDelay.Hold or 125)
                     end
                     self.RightPressed = false
                 end

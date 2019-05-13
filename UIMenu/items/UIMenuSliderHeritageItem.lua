@@ -48,6 +48,7 @@ function UIMenuSliderHeritageItem.New(Text, Items, Index, Description, SliderCol
         Slider = UIResRectangle.New(0, 0, 75, 10, _SliderColors.R, _SliderColors.G, _SliderColors.B, _SliderColors.A),
         Divider = UIResRectangle.New(0, 0, 4, 20, 255, 255, 255, 255),
         _Index = tonumber(Index) or 1,
+        InputDelay = { Start = 40, Hold = 20 },
         Audio = { Slider = "CONTINUOUS_SLIDER", Library = "HUD_FRONTEND_DEFAULT_SOUNDSET", Id = nil },
         OnSliderChanged = function(menu, item, newindex)
         end,
